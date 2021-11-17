@@ -11,7 +11,6 @@ var scanner = bufio.NewScanner(os.Stdin)
 var direction string
 var xAxis int
 var yAxis int
-var turn *string = &direction
 
 type Robot struct {
 	direction string
@@ -36,36 +35,36 @@ func InitializeRobotPosition() Robot {
 
 }
 
-func turnLeft(turn *string) {
-	switch *turn {
+func (robot *Robot) turnLeft() {
+	switch robot.direction {
 	case "N":
-		*turn = "W"
+		robot.direction = "W"
 	case "E":
-		*turn = "N"
+		robot.direction = "N"
 	case "S":
-		*turn = "E"
+		robot.direction = "E"
 	case "W":
-		*turn = "S"
+		robot.direction = "S"
 
 	}
 }
 
-func turnRight(turn *string) {
-	switch *turn {
+func (robot *Robot) turnRight() {
+	switch robot.direction {
 	case "N":
-		*turn = "E"
+		robot.direction = "E"
 	case "E":
-		*turn = "S"
+		robot.direction = "S"
 	case "S":
-		*turn = "W"
+		robot.direction = "W"
 	case "W":
-		*turn = "N"
+		robot.direction = "N"
 
 	}
 }
 
-func (robot *Robot) getMovingCoordinate(movingRobot Robot, turn *string) {
-	switch *turn {
+func (robot *Robot) getMovingCoordinate() {
+	switch robot.direction {
 	case "N":
 		robot.yAxis = robot.yAxis + 1
 	case "E":
@@ -82,16 +81,16 @@ func (robot Robot) Move(command []string) {
 	for i := 0; i < len(command); i++ {
 		switch command[i] {
 		case "L":
-			turnLeft(turn)
-			fmt.Printf("%s -> (%d,%d)\n", direction, xAxis, yAxis)
+			robot.turnLeft()
+			fmt.Printf("%s -> (%d,%d)\n", robot.direction, robot.xAxis, robot.yAxis)
 		case "R":
-			turnRight(turn)
-			fmt.Printf("%s -> (%d,%d)\n", direction, xAxis, yAxis)
+			robot.turnRight()
+			fmt.Printf("%s -> (%d,%d)\n", robot.direction, robot.xAxis, robot.yAxis)
 		case "A":
-			robot.getMovingCoordinate(robot, turn)
+			robot.getMovingCoordinate()
 			fmt.Printf("%s -> (%d,%d)\n", robot.direction, robot.xAxis, robot.yAxis)
 		default:
-			fmt.Printf("%s -> (%d,%d)\n", direction, xAxis, yAxis)
+			fmt.Printf("%s -> (%d,%d)\n", robot.direction, robot.xAxis, robot.yAxis)
 		}
 	}
 }
