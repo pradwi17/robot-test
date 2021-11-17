@@ -78,7 +78,7 @@ func getMovingCoordinate(x *int, y *int, turn *string) {
 	}
 }
 
-func Move(command []string) {
+func (robot Robot) Move(command []string) {
 	for i := 0; i < len(command); i++ {
 		switch command[i] {
 		case "L":

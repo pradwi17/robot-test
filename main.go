@@ -14,10 +14,10 @@ var command []string
 
 func main() {
 
-	entity.InitializeRobotPosition()
+	robot := entity.InitializeRobotPosition()
 	fmt.Print("Input command (A, L, R): ")
 	scanner.Scan()
 	command = strings.Split(scanner.Text(), "")
-	entity.Move(command)
+	robot.Move(command)
 
 }
