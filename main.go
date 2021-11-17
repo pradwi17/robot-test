@@ -14,8 +14,10 @@ var direction string
 var xAxis int
 var yAxis int
 var command []string
+var turn *string = &direction
 
 func main() {
+	
 	direction, xAxis, yAxis = initializePosition()
 	fmt.Print("Input command (A, L, R): ")
 	scanner.Scan()
@@ -39,35 +41,37 @@ func initializePosition() (direction string, x int, y int) {
 	return direction, x, y
 }
 
-func move(command [] string)  {
-	var turn *string = &direction
+func move(command []string) {
 	for i := 0; i < len(command); i++ {
 		switch command[i] {
 		case "L":
 			turnLeft(turn)
-			fmt.Println(direction)
+			fmt.Printf("%s -> (%d,%d)\n", direction, xAxis, yAxis)
 		case "R":
 			turnRight(turn)
-			fmt.Println(direction)
+			fmt.Printf("%s -> (%d,%d)\n", direction, xAxis, yAxis)
+		case "A":
+			getMovingCoordinate(&xAxis, &yAxis, turn)
+			fmt.Printf("%s -> (%d,%d)\n", direction, xAxis, yAxis)
 		}
-	}	
-}
-
-func turnLeft(turn *string)  {
-	switch *turn {
-	case "N":
-		*turn = "W"
-	case "E":
-		*turn = "N"
-	case "S":
-		*turn = "E"
-	case "W":
-		*turn = "S"
-		
 	}
 }
 
-func turnRight(turn *string)  {
+func turnLeft(turn *string) {
+	switch *turn {
+	case "N":
+		*turn = "W"
+	case "E":
+		*turn = "N"
+	case "S":
+		*turn = "E"
+	case "W":
+		*turn = "S"
+
+	}
+}
+
+func turnRight(turn *string) {
 	switch *turn {
 	case "N":
 		*turn = "E"
@@ -77,6 +81,20 @@ func turnRight(turn *string)  {
 		*turn = "W"
 	case "W":
 		*turn = "N"
-		
+
+	}
+}
+
+func getMovingCoordinate(x *int, y *int, turn *string) {
+	switch *turn {
+	case "N":
+		*y = *y + 1
+	case "E":
+		*x = *x + 1
+	case "S":
+		*y = *y - 1
+	case "W":
+		*x = *x - 1
+
 	}
 }
