@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 )
 
 var scanner = bufio.NewScanner(os.Stdin)
@@ -12,9 +13,14 @@ var scanner = bufio.NewScanner(os.Stdin)
 var direction string
 var xAxis int
 var yAxis int
+var command []string
 
 func main() {
-	direction, xAxis, yAxis = 	initializePosition()
+	direction, xAxis, yAxis = initializePosition()
+	fmt.Print("Input command (A, L, R): ")
+	scanner.Scan()
+	command = strings.Split(scanner.Text(), "")
+	fmt.Println(command)
 
 }
 
