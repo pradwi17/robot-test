@@ -14,8 +14,7 @@ var command []string
 
 func main() {
 
-	var robot = entity.InitializeRobotPosition()
-	fmt.Println(robot)
+	entity.InitializeRobotPosition()
 	fmt.Print("Input command (A, L, R): ")
 	scanner.Scan()
 	command = strings.Split(scanner.Text(), "")
