@@ -26,6 +26,8 @@ func initializePosition() (direction string, x int, y int) {
 	fmt.Print("X axis (number): ")
 	scanner.Scan()
 	x, _ = strconv.Atoi(scanner.Text())
-
+	fmt.Print("Y axis (number): ")
+	scanner.Scan()
+	y, _ = strconv.Atoi(scanner.Text())
 	return direction, x, y
 }
