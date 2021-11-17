@@ -64,16 +64,16 @@ func turnRight(turn *string) {
 	}
 }
 
-func getMovingCoordinate(x *int, y *int, turn *string) {
+func (robot *Robot) getMovingCoordinate(movingRobot Robot, turn *string) {
 	switch *turn {
 	case "N":
-		*y = *y + 1
+		robot.yAxis = robot.yAxis + 1
 	case "E":
-		*x = *x + 1
+		robot.xAxis = robot.xAxis + 1
 	case "S":
-		*y = *y - 1
+		robot.yAxis = robot.yAxis - 1
 	case "W":
-		*x = *x - 1
+		robot.xAxis = robot.xAxis - 1
 
 	}
 }
@@ -88,8 +88,8 @@ func (robot Robot) Move(command []string) {
 			turnRight(turn)
 			fmt.Printf("%s -> (%d,%d)\n", direction, xAxis, yAxis)
 		case "A":
-			getMovingCoordinate(&xAxis, &yAxis, turn)
-			fmt.Printf("%s -> (%d,%d)\n", direction, xAxis, yAxis)
+			robot.getMovingCoordinate(robot, turn)
+			fmt.Printf("%s -> (%d,%d)\n", robot.direction, robot.xAxis, robot.yAxis)
 		default:
 			fmt.Printf("%s -> (%d,%d)\n", direction, xAxis, yAxis)
 		}
